@@ -26,7 +26,7 @@
 
 ```
 
-  $ yarn add --dev remote-redux-devtools
+  $ yarn add --dev remote-redux-devtools babel-eslint
 
 ```
 
@@ -56,6 +56,7 @@
 ```
 
 {
+      "parser": "babel-eslint",
       "rules": {
         "react/jsx-filename-extension": [
             1,
