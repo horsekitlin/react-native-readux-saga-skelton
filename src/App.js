@@ -1,22 +1,15 @@
 
-import React from 'react';
+import React from "react";
 import {
-  Provider,
-  connect,
-} from 'react-redux';
-import {
-  Router,
-} from 'react-native-router-flux';
-
-import configureStore from './store/configureStore';
-import routes from './routes';
+  Provider
+} from "react-redux";
+import AuthWrapper from "./containers/AuthWrapper";
+import configureStore from "./store/configureStore";
 const store = configureStore();
-
-const RouterWithRedux = connect()(Router);
 
 const ProviderWrapper = () => (
   <Provider store={store}>
-    <RouterWithRedux scenes={routes} />
+    <AuthWrapper />
   </Provider>
 );
 

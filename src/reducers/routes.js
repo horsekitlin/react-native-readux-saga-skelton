@@ -1,6 +1,6 @@
 import {
-  ActionConst,
-} from 'react-native-router-flux';
+  ActionConst
+} from "react-native-router-flux";
 
 const initialState = {
   scene: {},
@@ -12,22 +12,22 @@ export default function reducer(state = initialState, action = {}) {
     case ActionConst.FOCUS:
       return {
         ...state,
-        scene: action.scene,
+        scene: action.scene
       };
     case ActionConst.PUSH:
       return {
         ...state,
-        scene: action.scene,
+        scene: action.scene
       };
     case ActionConst.BACK_ACTION:
       return {
         ...state,
-        scene: action.scene,
+        scene: action.scene
       };
     case ActionConst.REFRESH:
       return {
         ...state,
-        open: action.open,
+        open: action.open
       };
     default:
       return state;

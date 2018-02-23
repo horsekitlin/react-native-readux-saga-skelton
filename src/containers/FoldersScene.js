@@ -1,23 +1,20 @@
-import React from 'react';
 import {
-  View,
-} from 'react-native';
-import {
-  connect,
-} from 'react-redux';
-import FolderScene from '../components/FolderScene';
+  connect
+} from "react-redux";
+import FolderScene from "../components/FolderScene";
+import {login} from "../actions/auth";
 
 const mapStateToProps = ({ auth }) => ({
-  auth,
+  auth
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: (payload) => dispatch(login(payload)),
+    login: (payload) => dispatch(login(payload))
   };
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(FolderScene);

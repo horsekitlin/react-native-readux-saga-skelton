@@ -1,34 +1,19 @@
-import React, {
-  Component,
-} from 'react';
-import {
-  View,
-} from 'react-native';
+import React from "react";
 import {
   Scene,
-  Actions,
-} from 'react-native-router-flux';
+  Router
+} from "react-native-router-flux";
 
-import FolderScene from './containers/FoldersScene';
-import LoginScene from './containers/LoginScene';
-import AuthWrapper from './containers/AuthWrapper';
+import FolderScene from "./containers/FoldersScene";
 
-export default Actions.create(
-  <Scene key="root">
-    <Scene key="auth" component={AuthWrapper} >
-      <Scene key="nav"
-        hideNavBar={false}
-      >
-        <Scene key="login"
-          renderLeftButton={() => <View />}
-          component={LoginScene}
-        />
-        <Scene
-          renderLeftButton={() => <View />}
-          component={FolderScene}
-          key="folders"
-        />
-      </Scene>
-    </Scene>
-  </Scene>,
-);
+export default <Router>
+  <Scene key="nav"
+    hideNavBar={false}
+  >
+    <Scene
+      title="Folder"
+      component={FolderScene}
+      key="folders"
+    />
+  </Scene>
+</Router>;

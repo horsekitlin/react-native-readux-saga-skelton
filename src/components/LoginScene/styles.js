@@ -1,15 +1,15 @@
 import {
-  StyleSheet,
-} from 'react-native';
+  StyleSheet
+} from "react-native";
 
 export default StyleSheet.create({
   container: {
-    marginTop: 84,
+    marginTop: 64
   },
   loginCardImage: {
-    height: 170,
+    height: 170
   },
   loginButton: {
-    marginTop: 20,
-  },
+    marginTop: 20
+  }
 });
