@@ -1,5 +1,6 @@
 import { takeLatest } from "redux-saga/effects";
-import types from "../constants/ActionTypes";
+import {loginSaga} from "./authSagas";
 
-import {} from "./authSagas";
-
+export function* watchLoginSaga() {
+  yield takeLatest(types.LOGIN, loginSaga);
+}

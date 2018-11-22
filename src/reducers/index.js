@@ -3,5 +3,4 @@ import auth from './authReducer';
 
 export default combineReducers({
   auth,
-  routes,
 });

@@ -7,11 +7,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "flux-constants": "^0.2.2",
+    "immutable": "^4.0.0-rc.12",
     "react": "16.6.1",
     "react-native": "0.57.5",
     "react-redux": "^5.1.1",
     "redux": "^4.0.1",
-    "redux-devtools-extension": "^2.13.5",
     "redux-saga": "^0.16.2"
   },
   "devDependencies": {
