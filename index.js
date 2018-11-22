@@ -1,16 +1,16 @@
 /** @format */
 import React from 'react';
 import {AppRegistry} from 'react-native';
-import App from './src/App';
+import AppContainer from './src/containers/AppContainer';
 import {name as appName} from './app.json';
 import {Provider} from "react-redux";
 import configureStore from './src/store/configureStore';
 
 const store = configureStore();
 
-const AppContainer = () => 
+const CashbackApp = () => 
   <Provider store={store}>
-    <App />
+    <AppContainer />
   </Provider>
 
-AppRegistry.registerComponent(appName, () => AppContainer);
+AppRegistry.registerComponent(appName, () => CashbackApp);
