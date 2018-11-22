@@ -1,13 +1,11 @@
-import {
-  fork,
-  all
-} from "redux-saga/effects";
-import {
-  watchLoginSaga
-} from "./watcher";
+import {fork,all} from "redux-saga/effects";
+import {} from "./watcher";
 
 export default function* startForman() {
-  yield all([
-    fork(watchLoginSaga)
-  ]);
+  const sagas = [];
+
+  for (let key in Watchers) {
+    sagas.push(fork(Watchers[key]));
+  }
+  yield all(sagas);
 }
