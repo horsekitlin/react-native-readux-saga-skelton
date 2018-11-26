@@ -1,4 +1,4 @@
-import {put} from 'redux-saga/effects';
+import {put, call} from 'redux-saga/effects';
 import types from '../constants/actionTypes';
 
 export function* loginSaga({ payload }) {

@@ -1,7 +1,6 @@
 import {fork,all} from "redux-saga/effects";
 import * as Watchers from "./watchers";
 
-console.log(Watchers);
 export default function* startForman() {
   const sagas = [];
 
