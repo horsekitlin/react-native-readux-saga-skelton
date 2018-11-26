@@ -5,9 +5,12 @@ import Main from './components/MainScene';
 import Login from './containers/LoginContainer';
 
 export default class App extends Component {
+  componentDidMount() {
+    this.props.handleInitialApp();
+  }
   render() {
     const {auth} = this.props;
-    if(!auth.get('initial')) return <Fetching isOpen={true}/>;
+    if(!auth.get('initial')) return <Fetching isOpen={true} />;
 
     return (
       <View style={styles.container}>

@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import App from "../App";
-import { initialAppInformation } from "../actions/settingActions";
+import {initialAppInformation} from "../actions/settingActions";
 
 const mapStateToProps = ({ auth }) => ({
   auth
