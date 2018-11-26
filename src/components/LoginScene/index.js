@@ -9,8 +9,10 @@ import {
   TouchableOpacity,
   TouchableHighlight,
 } from "react-native";
-import {FormInput, FormLabel, Button, CheckBox} from "react-native-elements";
+import {Button, CheckBox} from "react-native-elements";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Fetching from "../common/Fetching";
+import { authState } from "../../reducers/initialState";
 
 class LoginScene extends React.Component {
   constructor(props) {
@@ -23,11 +25,16 @@ class LoginScene extends React.Component {
     };
   }
 
+  handleSubmit = () => {
+    this.props.handleLogin(this.state);
+  }
+
   render() {
     return (
       <KeyboardAvoidingView
         style={styles.formContainer}
         keyboardVerticalOffset={60}>
+        
         <View style={styles.imageContainer}>
           <Image
             style={styles.imageStyle}
@@ -108,6 +115,7 @@ class LoginScene extends React.Component {
           />
         </View>
         <View style={{flex: 1}} />
+        <Fetching isOpen={this.props.auth.get('isFetching')} />
       </KeyboardAvoidingView>
     );
   }

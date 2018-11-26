@@ -17,7 +17,8 @@ export default class App extends Component {
         {
           auth.get('isAuth')
             ? <Main />
-            : <Login />
+            : <Login
+                handleLogin={this.props.handleLogin} />
         }
       </View>
     );
