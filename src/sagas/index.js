@@ -6,5 +6,6 @@ export default function* startForman() {
   for (let key in Watchers) {
     sagas.push(fork(Watchers[key]));
   }
+
   yield all(sagas);
 }

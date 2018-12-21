@@ -10,7 +10,7 @@ export default class App extends Component {
   }
   render() {
     const {auth, setting} = this.props;
-    console.log(setting.get('fetchCount'));
+
     if(!auth.get('initial')) return <Fetching isOpen={true} />;
 
     return (

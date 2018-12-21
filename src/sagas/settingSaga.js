@@ -1,11 +1,13 @@
-import {put, call} from 'redux-saga/effects';
+import {put, call, all} from 'redux-saga/effects';
 import types from '../constants/actionTypes';
-import { getAppInformation } from '../store/asyncStorageManager';
-const initialAppInformationSuccess = (result, isAuth = false) => ({
+import { getAppInformation, getUserInformation } from '../store/asyncStorageManager';
+
+const initialAppInformationSuccess = (appInfo, userInfo, isAuth = false) => ({
   type: types.INIT_APP_INFORMATION_SUCCESS,
   payload: {
-    result,
-    isAuth
+    userInfo,
+    isAuth,
+    appInfo,
   }
 });
 
@@ -16,9 +18,13 @@ const initialAppInformationError = ({message}) => ({
 
 export function* initialAppInformationSaga () {
   try {
-    const result = yield call(getAppInformation);
-    const isAuth = result !== null;
-    const resAction = initialAppInformationSuccess(result, isAuth);
+    const [appInfoStr=null, userInfoStr = null] = yield all([call(getAppInformation), call(getUserInformation)]);
+    const isAuth = userInfoStr !== null;
+
+    const appInfo = appInfoStr ? JSON.parse(appInfoStr) : {};
+    const userInfo = userInfoStr ? JSON.parse(userInfoStr) : {};
+
+    const resAction = initialAppInformationSuccess(appInfo, userInfo, isAuth);
 
     yield put(resAction);
   }catch (error) {
