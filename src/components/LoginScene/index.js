@@ -18,7 +18,7 @@ class LoginScene extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      account: "",
+      userName: "",
       password: "",
       toggle: true,
       checked: false,
@@ -48,12 +48,13 @@ class LoginScene extends React.Component {
           <View style={styles.textSection}>
             <Text style={styles.textLabel}>用户名</Text>
             <TextInput
+              autoCapitalize="none"
               returnKeyType="done"
               style={styles.textContent}
               underlineColorAndroid="transparent"
               placeholder="请输入用户名"
-              onChangeText={(account) => this.setState({ account })}
-              value={this.state.account}
+              onChangeText={(userName) => this.setState({ userName })}
+              value={this.state.userName}
             />
           </View>
           <View style={styles.textSection}>
@@ -117,7 +118,6 @@ class LoginScene extends React.Component {
           />
         </View>
         <View style={{flex: 1}} />
-        <Fetching isOpen={this.props.auth.get('isFetching')} />
       </KeyboardAvoidingView>
     );
   }

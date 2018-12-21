@@ -2,10 +2,11 @@ import {put, call} from 'redux-saga/effects';
 import types from '../constants/actionTypes';
 import { loginResult } from '../apis/api';
 
-const okLogin = (result) => ({
+const okLogin = ({data}) => ({
   type: types.LOGIN_SUCCESS,
   payload: {
     isAuth: true,
+    info: data
   }
 });
 
@@ -16,9 +17,8 @@ const errLogin = ({message}) => ({
 
 export function* loginSaga({ payload }) {
   try {
-    console.log(12132131);
     const {ok, result} = yield call(loginResult, payload);
-    
+    console.log(ok, result)
     const resAction = ok && result.code === '0'
       ? okLogin(result)
       : errLogin(result);

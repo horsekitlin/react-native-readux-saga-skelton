@@ -6,7 +6,7 @@ export default function reducer(auth = authState, { type, payload }) {
     case types.LOGIN:
       return auth.merge({isFetching: true});
     case types.LOGIN_SUCCESS:
-      return auth.merge({isFetching: false, isAuth: true});
+      return auth.merge({isFetching: false, ...payload});
     case types.INIT_APP_INFORMATION_SUCCESS:
       return auth.merge({isFetching: false, isAuth: payload.isAuth, initial: true});
     case types.LOGIN_ERROR:

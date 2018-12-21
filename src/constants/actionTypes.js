@@ -1,6 +1,8 @@
 import constants from 'flux-constants';
 
 export default constants([
+  'START_FETCHING',
+  'STOP_FETCHING',
   'LOGIN',
   'LOGIN_SUCCESS',
   'LOGIN_ERROR',
