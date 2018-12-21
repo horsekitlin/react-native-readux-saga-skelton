@@ -7,3 +7,7 @@ export const authState = immutable.fromJS({
   info: {},
   token: ''
 });
+
+export const settingState = immutable.fromJS({
+  fetchCount: 0,
+});

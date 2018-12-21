@@ -9,7 +9,7 @@ export default class App extends Component {
     this.props.handleInitialApp();
   }
   render() {
-    const {auth} = this.props;
+    const {auth, setting} = this.props;
     if(!auth.get('initial')) return <Fetching isOpen={true} />;
 
     return (
@@ -17,9 +17,9 @@ export default class App extends Component {
         {
           auth.get('isAuth')
             ? <Main />
-            : <Login
-                handleLogin={this.props.handleLogin} />
+            : <Login handleLogin={this.props.handleLogin} />
         }
+        <Fetching isOpen={setting.get('fetchCount') > 0} />
       </View>
     );
   }

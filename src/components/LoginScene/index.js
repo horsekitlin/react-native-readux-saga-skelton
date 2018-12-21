@@ -18,9 +18,9 @@ class LoginScene extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userNameInput: "",
-      passwordInput: "",
-      toggle: false,
+      account: "",
+      password: "",
+      toggle: true,
       checked: false,
     };
   }
@@ -28,6 +28,9 @@ class LoginScene extends React.Component {
   handleSubmit = () => {
     this.props.handleLogin(this.state);
   }
+
+  onEyePress = () => 
+    this.setState(state => ({...state, toggle: !state.toggle}))
 
   render() {
     return (
@@ -46,12 +49,11 @@ class LoginScene extends React.Component {
             <Text style={styles.textLabel}>用户名</Text>
             <TextInput
               returnKeyType="done"
-              ref={"userNameInput"}
               style={styles.textContent}
               underlineColorAndroid="transparent"
               placeholder="请输入用户名"
-              onChangeText={(userNameInput) => this.setState({ userNameInput })}
-              value={this.state.userNameInput}
+              onChangeText={(account) => this.setState({ account })}
+              value={this.state.account}
             />
           </View>
           <View style={styles.textSection}>
@@ -62,15 +64,15 @@ class LoginScene extends React.Component {
               underlineColorAndroid={"transparent"}
               secureTextEntry={this.state.toggle}
               placeholder="请输入8码以上英数组合"
-              onChangeText={(passwordInput) => this.setState({ passwordInput })}
-              value={this.state.passwordInput}
+              onChangeText={(password) => this.setState({ password })}
+              value={this.state.password}
             />
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => this.onEyePress()}>
+              onPress={this.onEyePress}>
               <View style={styles.toogleBtn}>
-                {this.state.toggle ?
-                  <FontAwesome name="eye-slash" style={styles.toogleSize} />
+                {this.state.toggle
+                  ? <FontAwesome name="eye-slash" style={styles.toogleSize} />
                   : <FontAwesome name="eye" style={styles.toogleSize} />
                 }
               </View>
@@ -94,7 +96,7 @@ class LoginScene extends React.Component {
           <View style={styles.buttonSection}>
             <TouchableHighlight style={styles.submit}
               underlayColor="#3751B8"
-              onPress={() => this.handleSubmit()}
+              onPress={this.handleSubmit}
             >
               <Text style={[styles.submitText]}>登录</Text>
             </TouchableHighlight>
