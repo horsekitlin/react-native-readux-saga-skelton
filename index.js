@@ -12,5 +12,6 @@ const CashbackApp = () =>
   <Provider store={store}>
     <AppContainer />
   </Provider>
+  
 
 AppRegistry.registerComponent(appName, () => CashbackApp);

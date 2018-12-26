@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-const MainScene = (props) =>
+const HomeScene = (props) =>
   <View>
-    <Text>Main scene</Text>
+    <Text>Home scene</Text>
   </View>
 
-export default MainScene;
+export default HomeScene;

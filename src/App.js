@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Fetching from './components/common/Fetching';
-import Main from './components/MainScene';
+import ReduxWithRouter from './containers/RouterContainer';
 import Login from './containers/LoginContainer';
+import routes from './routes';
 
 export default class App extends Component {
   componentDidMount() {
     this.props.handleInitialApp();
   }
+
   render() {
     const {auth, setting} = this.props;
 
@@ -17,7 +19,7 @@ export default class App extends Component {
       <View style={styles.container}>
         {
           auth.get('isAuth')
-            ? <Main />
+            ? <ReduxWithRouter scenes={routes} />
             : <Login handleLogin={this.props.handleLogin} />
         }
         <Fetching isOpen={setting.get('fetchCount') > 0} />
