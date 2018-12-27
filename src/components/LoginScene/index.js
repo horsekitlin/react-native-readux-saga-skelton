@@ -4,15 +4,20 @@ import {
   View,
   KeyboardAvoidingView,
   Image,
-  Text,
-  TextInput,
   TouchableOpacity,
-  TouchableHighlight,
+  TouchableHighlight
 } from "react-native";
-import {Button, CheckBox} from "react-native-elements";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import Fetching from "../common/Fetching";
-import { authState } from "../../reducers/initialState";
+import { Button, CheckBox, Input, Text } from "react-native-elements";
+import { Grid, Row, Col } from "react-native-easy-grid";
+import colors from "../../constants/colors";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { getCN } from "../../utils/LanguageManager";
+
+const EyeIconButton = (props) =>
+  <Button clear {...props}  icon={<Icon name="eye" size={15} />} title="" />
+
+const EyeSlashIconButton = (props) => console.log(props) ||
+  <Button clear {...props} icon={<Icon name="eye-slash" size={15} />} title="" />
 
 class LoginScene extends React.Component {
   constructor(props) {
@@ -21,182 +26,106 @@ class LoginScene extends React.Component {
       userName: "",
       password: "",
       toggle: true,
-      checked: false,
+      checked: false
     };
   }
 
   handleSubmit = () => {
     this.props.handleLogin(this.state);
-  }
+  };
 
-  onEyePress = () => 
-    this.setState(state => ({...state, toggle: !state.toggle}))
+  onEyePress = (toggle) => () => console.log(toggle) ||
+    this.setState(state => ({ ...state, toggle }));
+
+  handleRememberMe = () =>
+    this.setState(state => ({
+      ...state,
+      checked: !this.state.checked
+    }));
 
   render() {
+    console.log(this.state.toggle);
     return (
-      <KeyboardAvoidingView
-        style={styles.formContainer}
-        keyboardVerticalOffset={60}>
-        
-        <View style={styles.imageContainer}>
-          <Image
-            style={styles.imageStyle}
-            source={require("../../assets/images/LOGO.png")}
-          />
-        </View>
-        <View style={{flex: 3}}>
-          <View style={styles.textSection}>
-            <Text style={styles.textLabel}>用户名</Text>
-            <TextInput
-              autoCapitalize="none"
-              returnKeyType="done"
-              style={styles.textContent}
-              underlineColorAndroid="transparent"
-              placeholder="请输入用户名"
-              onChangeText={(userName) => this.setState({ userName })}
-              value={this.state.userName}
-            />
-          </View>
-          <View style={styles.textSection}>
-            <Text style={styles.textLabel}>密码</Text>
-            <TextInput
-              returnKeyType="done"
-              style={styles.textContent}
-              underlineColorAndroid={"transparent"}
+      <KeyboardAvoidingView style={styles.container}>
+        <Grid>
+          <Row size={1} style={styles.center}>
+            <Image source={require("../../assets/images/LOGO.png")} />
+          </Row>
+          <Row style={styles.formColumn}>
+            <Input containerStyle={styles.formUnit} label={getCN("用戶名")} />
+          </Row>
+          <Row style={styles.formColumn}>
+            <Input
+              type='password'
               secureTextEntry={this.state.toggle}
-              placeholder="请输入8码以上英数组合"
-              onChangeText={(password) => this.setState({ password })}
-              value={this.state.password}
+              onClick={this.onEyePress}
+              containerStyle={styles.formUnit}
+              rightIcon={
+                this.state.toggle
+                  ? <EyeIconButton onPress={this.onEyePress(false)} />
+                  : <EyeSlashIconButton onPress={this.onEyePress(true)} />
+              }
+              label={getCN("登錄密碼")}
             />
-            <TouchableOpacity
-              activeOpacity={0.5}
-              onPress={this.onEyePress}>
-              <View style={styles.toogleBtn}>
-                {this.state.toggle
-                  ? <FontAwesome name="eye-slash" style={styles.toogleSize} />
-                  : <FontAwesome name="eye" style={styles.toogleSize} />
-                }
-              </View>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.checkBoxSection}>
+          </Row>
+          <Row style={styles.formColumn}>
             <CheckBox
-              containerStyle={{
-                backgroundColor: '#fff',
-                borderWidth: 0,
-                paddingHorizontal: 0,
-                marginHorizontal: 0
-              }}
-              left
-              title='记住密码'
-              checkedColor='#4869ee'
               checked={this.state.checked}
-              onPress={() => this.setState(state => ({...state, checked: !this.state.checked}))}
+              onPress={this.handleRememberMe}
+              containerStyle={styles.checkBoxContainer}
+              title={getCN("記住密碼")}
             />
-          </View>
-          <View style={styles.buttonSection}>
-            <TouchableHighlight style={styles.submit}
-              underlayColor="#3751B8"
-              onPress={this.handleSubmit}
-            >
-              <Text style={[styles.submitText]}>登录</Text>
-            </TouchableHighlight>
-          </View>
-        </View>
-        <View style={styles.linkSection}>
-          <Button
-            backgroundColor="transparent"
-            textStyle={{ textAlign: 'left', color: '#515556' }}
-            title='找回密码'
-            onPress={(e) => this.onGotoNextScreen('ResetPassword')}
-          />
-          <Button
-            backgroundColor="transparent"
-            textStyle={{ textAlign: 'right', color: '#515556' }}
-            title='注册新用户'
-            onPress={(e) => this.onGotoNextScreen('Register')}
-          />
-        </View>
-        <View style={{flex: 1}} />
+          </Row>
+          <Row style={styles.center}>
+            <Button
+              containerStyle={styles.formUnit}
+              buttonStyle={styles.loginButton}
+              title={getCN("登錄")}
+            />
+          </Row>
+          <Row style={styles.center}>
+            <Row style={styles.formUnit}>
+              <Col>
+                <Button
+                  title="找回密码"
+                  titleStyle={styles.linkButtonText}
+                  buttonStyle={styles.linkButton}
+                  onPress={e => this.onGotoNextScreen("ResetPassword")}
+                />
+              </Col>
+              <Col>
+                <Button
+                  title="注册新用户"
+                  titleStyle={styles.linkButtonText}
+                  buttonStyle={styles.linkButton}
+                  onPress={e => this.onGotoNextScreen("Register")}
+                />
+              </Col>
+            </Row>
+          </Row>
+        </Grid>
       </KeyboardAvoidingView>
     );
   }
 }
 const styles = StyleSheet.create({
-  formContainer: {
-    flex: 1,
-    flexDirection: "column",
+  container: { flex: 1, display: "flex", marginTop: 112 },
+  linkButton: { backgroundColor: "transparent" },
+  linkButtonText: { color: colors.blue["700"] },
+  formUnit: { width: "70%" },
+  center: { justifyContent: "center" },
+  loginButton: { backgroundColor: colors.blue["900"] },
+  formColumn: {
     justifyContent: "center",
-    alignItems: "center",
-    padding: 25,
-    backgroundColor: "#fff",
-  },
-  imageContainer: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    backgroundColor: "#fff",
-  },
-  imageStyle: {
-    width: 120,
-    height: 120,
-    marginTop: 30,
-    marginBottom: 30,
-  },
-  textSection: {
-    width: "100%",
-    height: 52,
-    flexDirection: "row",
-    alignItems: "center",
-    borderBottomWidth: 1,
-    borderBottomColor: "rgba(0,0,0,0.12)",
-  },
-  checkBoxSection: {
-    width: "100%",
-    height: 52,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  textLabel: {
-    width: "30%",
-  },
-  textContent: {
-    flex: 1,
-  },
-  buttonSection: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 5,
-  },
-  submit: {
-    width: "100%",
-    backgroundColor: "#4869ee",
-    paddingTop: 15,
-    paddingBottom: 15,
-    borderRadius: 4,
+    maxHeight: 60,
     marginTop: 20,
+    marginBottom: 20
   },
-  submitText: {
-    color: "#fff",
-    textAlign: "center",
+  checkBoxContainer: {
+    width: "70%",
+    backgroundColor: colors.white,
+    borderWidth: 0
   },
-  linkSection: {
-    flex: 1,
-    width: "100%",
-    marginTop: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  versionSection: {
-    marginTop: 50,
-  },
-  toogleBtn: {
-    padding: 15,
-  },
-  toogleSize: {
-    fontSize: 16,
-  }
 });
 
 export default LoginScene;
