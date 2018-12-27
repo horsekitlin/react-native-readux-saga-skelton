@@ -16,7 +16,7 @@ import { getCN } from "../../utils/LanguageManager";
 const EyeIconButton = (props) =>
   <Button clear {...props}  icon={<Icon name="eye" size={15} />} title="" />
 
-const EyeSlashIconButton = (props) => console.log(props) ||
+const EyeSlashIconButton = (props) =>
   <Button clear {...props} icon={<Icon name="eye-slash" size={15} />} title="" />
 
 class LoginScene extends React.Component {
